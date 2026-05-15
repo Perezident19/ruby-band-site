@@ -54,6 +54,7 @@ a {
 .nav-wrap,
 .footer-wrap,
 .hero-grid,
+.venue-strip-inner,
 .venue-items,
 .split-layout,
 .card-grid,
@@ -79,17 +80,11 @@ a {
   gap: 0.9rem;
 }
 
-.brand-mark {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--ruby-bright), var(--ruby));
-  font-family: "Oswald", sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.08em;
+.brand-logo {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(224, 29, 68, 0.3));
 }
 
 .brand-copy {
@@ -212,6 +207,17 @@ h3 {
   max-width: 45rem;
 }
 
+.hero-subtitle {
+  margin: 0.8rem 0 0;
+  max-width: 28rem;
+  color: #e9d9dc;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  line-height: 1.4;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
 .hero-actions,
 .button-row {
   display: flex;
@@ -290,15 +296,57 @@ h3 {
   color: var(--muted);
 }
 
+.photo-frame,
+.page-photo-banner,
+.photo-panel,
+.booking-photo {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.photo-frame img,
+.page-photo-banner img,
+.photo-panel img,
+.booking-photo img,
+.member-photo img,
+.cover-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-photo-banner {
+  margin-top: 2rem;
+  max-height: 420px;
+}
+
 .venue-strip {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
 }
 
-.venue-items {
-  grid-template-columns: repeat(4, 1fr);
+.venue-strip-inner {
   padding: 1rem 0;
+  gap: 0.6rem;
+}
+
+.venue-label {
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #ff7e98;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.venue-items {
+  grid-template-columns: repeat(5, 1fr);
   text-align: center;
   color: #f2c7cf;
   font-weight: 700;
@@ -383,6 +431,20 @@ h3 {
   font-weight: 700;
 }
 
+.cover-thumb {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cover-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .contact-panel {
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
@@ -400,6 +462,7 @@ h3 {
 .member-photo {
   min-height: 250px;
   color: white;
+  overflow: hidden;
 }
 
 .member-role {
@@ -420,6 +483,12 @@ h3 {
 .cover-art {
   min-height: 220px;
   color: white;
+  overflow: hidden;
+}
+
+.booking-photo {
+  margin-bottom: 1rem;
+  max-height: 240px;
 }
 
 .media-layout {

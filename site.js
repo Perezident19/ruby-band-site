@@ -1,3 +1,7 @@
+// To update show dates later:
+// 1. Copy one event block below
+// 2. Change the month, day, title, venue, location, and note
+// 3. Save this file and upload it to GitHub again
 const events = [
   {
     month: "JUN",
