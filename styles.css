@@ -299,7 +299,8 @@ h3 {
 .photo-frame,
 .page-photo-banner,
 .photo-panel,
-.booking-photo {
+.booking-photo,
+.story-photo {
   margin: 0;
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -311,6 +312,7 @@ h3 {
 .page-photo-banner img,
 .photo-panel img,
 .booking-photo img,
+.story-photo img,
 .member-photo img,
 .cover-art img {
   display: block;
@@ -322,6 +324,10 @@ h3 {
 .page-photo-banner {
   margin-top: 2rem;
   max-height: 420px;
+}
+
+.hero-photo img {
+  object-position: center 28%;
 }
 
 .venue-strip {
@@ -354,6 +360,10 @@ h3 {
 
 .section {
   padding: 4.8rem 0;
+}
+
+.photo-story-section {
+  padding-top: 0;
 }
 
 .split-layout {
@@ -417,6 +427,25 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.photo-story-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 1.2rem;
+}
+
+.story-photo-tall {
+  grid-row: span 2;
+  min-height: 640px;
+}
+
+.story-photo-wide {
+  min-height: 300px;
+}
+
+.story-photo-square {
+  min-height: 320px;
+}
+
 .video-placeholder {
   min-height: 100%;
   padding: 2rem;
@@ -443,6 +472,22 @@ h3 {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.crop-george {
+  object-position: center 18%;
+}
+
+.crop-band {
+  object-position: center 42%;
+}
+
+.crop-crowd {
+  object-position: center 46%;
+}
+
+.crop-dancefloor {
+  object-position: center 54%;
 }
 
 .contact-panel {
@@ -567,6 +612,7 @@ h3 {
   .split-layout,
   .three-up,
   .music-highlight,
+  .photo-story-grid,
   .contact-panel,
   .member-grid,
   .booking-grid,
@@ -599,6 +645,12 @@ h3 {
   .page-hero,
   .section {
     padding: 3.7rem 0;
+  }
+
+  .story-photo-tall,
+  .story-photo-wide,
+  .story-photo-square {
+    min-height: 280px;
   }
 
   h1 {
