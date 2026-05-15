@@ -394,6 +394,10 @@ h3 {
   text-align: left;
 }
 
+.section-heading-wide h2 {
+  max-width: none;
+}
+
 .content-card,
 .release-card,
 .release-panel,
