@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruby | Band</title>
+    <meta
+      name="description"
+      content="Meet the members of Ruby, a Chicago live band blending cover performances with original music."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="assets/ruby-logo.png" alt="Ruby logo" />
+          <span class="brand-copy">
+            <strong>RUBY THE BAND</strong>
+            <span>Chicago live band</span>
+          </span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="band.html">Band</a>
+          <a href="events.html">Events</a>
+          <a href="music.html">Original Music</a>
+          <a class="nav-cta" href="booking.html">Booking</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <figure class="page-photo-banner band-hero-banner">
+            <img
+              class="crop-new-band-banner"
+              src="assets/ruby-band-banner.jpg"
+              alt="Ruby performing live on stage"
+            />
+            <figcaption class="band-hero-copy">
+              <p class="eyebrow">Meet the band</p>
+              <h1>The people behind Ruby.</h1>
+              <p class="hero-text narrow">
+                Ruby's lineup is powered by a shared Google Sheet, so the band can
+                update names, roles, bios, and photos without touching the website code.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading left">
+            <p class="section-kicker">Core lineup</p>
+            <h2>Members</h2>
+          </div>
+          <div class="member-grid" id="members-list">
+            <p class="loading-note">Loading Ruby members...</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark additional-players-section" id="additional-players-section">
+        <div class="container">
+          <div class="section-heading left">
+            <p class="section-kicker">Sub-ins and friends of the band</p>
+            <h2>Additional Players</h2>
+          </div>
+          <div class="member-grid" id="additional-players-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>Ruby band page with Google Sheet-powered lineup updates.</p>
+        <a href="booking.html">Book the band</a>
+      </div>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>
