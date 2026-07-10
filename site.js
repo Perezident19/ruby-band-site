@@ -207,11 +207,19 @@ function renderMemberCard(member) {
 function renderAdditionalPlayerCard(member) {
   const name = cleanMemberName(member.name);
   const role = member.role || "";
+  const photoUrl = getPhotoUrl(member);
   const instagramLink = getInstagramLink(member.instagram_url);
   const instagramLabel = String(member.instagram_url || "").trim();
 
   return `
     <article class="member-card additional-player-card">
+      <div class="member-photo">
+        ${
+          photoUrl
+            ? `<img src="${escapeHtml(photoUrl)}" alt="${escapeHtml(name)} of Ruby" loading="lazy" referrerpolicy="no-referrer" />`
+            : `<span>${escapeHtml(name || "Ruby player")}</span>`
+        }
+      </div>
       <h3>${escapeHtml(name)}</h3>
       ${role ? `<p class="member-role">${escapeHtml(role)}</p>` : ""}
       ${
