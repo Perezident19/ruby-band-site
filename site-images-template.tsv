@@ -1,0 +1,10 @@
+page	section	image_id	image_url	crop_position	alt_text
+All pages	Header logo	site-logo	assets/ruby-neon-logo.jpg		Ruby logo
+Home	Main hero	home-hero	assets/ruby-hero-live.jpg		Ruby performing live under stage lights
+Home	Live moments - left	home-live-left	assets/xmas-george-close.jpg		George singing live on stage
+Home	Live moments - top right	home-live-top-right	assets/ruby-story-wide.jpg		Ruby guitarist and vocalist during a live set
+Home	Live moments - bottom right	home-live-bottom-right	assets/xmas-crowd-wide.jpg		Crowd gathered around a Ruby show
+Home	Quick links photo	home-quick-links	assets/xmas-dancefloor.jpg		Audience dancing during a Ruby performance
+Band	Main hero	band-hero	assets/ruby-band-banner.jpg		Ruby performing live on stage
+Events	Main hero	events-hero	assets/ruby-events-hero.jpg		Ruby performing live at Montrose Saloon
+Booking	Follow Us photo	booking-follow-us	assets/ruby-booking-guitar.jpg		Ruby guitarist playing live

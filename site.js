@@ -138,6 +138,7 @@ function loadSheet(sheetName) {
       params.set("gid", MUSIC_SHEET_GID);
       params.set("headers", "1");
     }
+    if (sheetName === "Site Images") params.set("headers", "1");
 
     window[callbackName] = (response) => {
       cleanup();
@@ -147,6 +148,11 @@ function loadSheet(sheetName) {
         return;
       }
 
+      if (sheetName === "Music Release" &&
+          !response.table.cols.some((column) => normalizeKey(column.label) === "title")) {
+        reject(new Error("Music Release needs its header row."));
+        return;
+      }
       resolve(formatSheetRows(response.table));
     };
 
@@ -368,9 +374,45 @@ function renderMusic(releases) {
 
 if (musicList || homeMusicList) {
   // Keep existing releases visible until the release tab has its required headers.
-  loadSheet("Music Release").then((releases) => {
-    if (releases.length && !Object.prototype.hasOwnProperty.call(releases[0], "title")) return;
-    if (!releases.length) return;
-    renderMusic(releases);
-  }).catch(() => {});
+  loadSheet("Music Release").then(renderMusic).catch(() => {});
+}
+
+function getSiteImagePosition(value) {
+  const position = String(value || "").trim().toLowerCase();
+  if (/^(center|top|bottom|left|right)( (center|top|bottom|left|right))?$/.test(position)) return position;
+  if (/^\d{1,3}% \d{1,3}%$/.test(position) &&
+      position.split(" ").every((part) => Number.parseInt(part, 10) <= 100)) return position;
+  return "";
+}
+
+function renderSiteImages(rows) {
+  const images = document.querySelectorAll("[data-site-image]");
+  const settings = new Map(rows.map((row) => [String(row.image_id || "").trim(), row]));
+  images.forEach((image) => {
+    const row = settings.get(image.dataset.siteImage);
+    if (!row) return;
+    const url = getPhotoUrl({ photo_url: row.image_url });
+    const safeUrl = getMusicUrl(url) || (/^assets\/[a-z0-9_./-]+$/i.test(url) ? url : "");
+    if (!safeUrl) return;
+    const position = getSiteImagePosition(row.crop_position);
+    const apply = () => {
+      image.referrerPolicy = "no-referrer";
+      image.src = safeUrl;
+      if (String(row.alt_text || "").trim()) image.alt = String(row.alt_text).trim();
+      if (position) image.style.objectPosition = position;
+    };
+    if (safeUrl === image.getAttribute("src")) {
+      apply();
+      return;
+    }
+    // Only replace a working image after its replacement has successfully loaded.
+    const preview = new Image();
+    preview.referrerPolicy = "no-referrer";
+    preview.onload = apply;
+    preview.src = safeUrl;
+  });
+}
+
+if (document.querySelectorAll("[data-site-image]").length) {
+  loadSheet("Site Images").then(renderSiteImages).catch(() => {});
 }
