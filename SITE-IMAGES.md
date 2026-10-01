@@ -29,5 +29,7 @@ Only photos change: layout, colors, type, and box dimensions remain unchanged.
 Member photos: continue using Members.
 Release cover art: continue using Music Release.
 Videos are unchanged and are not managed by Site Images.
+The homepage hero uses a video; any old home-hero image row is ignored.
+The Original Music hero photo is controlled by the music-hero row.
 
 Deploy the site code once. Future sheet photo edits require no redeployment.

@@ -728,6 +728,7 @@ h3 {
   justify-self: end;
 }
 
+.home-hero-video,
 .music-hero-video {
   width: 100%;
   aspect-ratio: 4 / 3;
