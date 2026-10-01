@@ -1,40 +1,45 @@
-# Hat Trick BBQ Company Practice Site
+# Ruby Mock Site
 
-This is a simple 2-page mock site:
+This folder contains a separate Vercel-ready mock site for the band Ruby.
 
-- `index.html` = the home page
-- `menu.html` = the full menu page
-- `styles.css` = all the colors, spacing, and design
+## Files
 
-## What to edit first
+- `index.html` = homepage
+- `band.html` = band member page
+- `events.html` = upcoming events page
+- `music.html` = original music page
+- `booking.html` = booking and contact page
+- `styles.css` = all visual styling
+- `site.js` = mock event list for the events page
 
-If you want to personalize this for the real business, start here:
+## Easiest edits
 
-1. Open `index.html`
-2. Find the hero headline near the top
-3. Change the contact section near the bottom
-4. Open `menu.html`
-5. Replace the sample menu items with the real ones
+If you want to change text:
 
-## Fast beginner rule
+- edit the `.html` files
 
-If you want to change:
+If you want to change colors or layout:
 
-- words: edit `index.html` or `menu.html`
-- colors or styling: edit `styles.css`
+- edit `styles.css`
 
-## Current placeholders
+If you want to change event dates:
 
-These still need real business info later:
+- open `site.js`
+- replace the sample event entries in the `events` list
 
-- phone number
-- email
-- exact menu items
-- exact review quotes
-- any real photos
+## What still needs real assets later
 
-## Next deployment step
+- logo
+- band photos
+- member names and bios
+- real booking email and phone
+- exact event dates
+- video link
 
-The site is ready locally.
+## Public references used for this mockup
 
-To get it live on Vercel, the folder still needs to be linked and deployed from a machine that has the Vercel CLI available, or imported through a Git repository in Vercel.
+- Instagram: `https://www.instagram.com/ruby_musicofficial/`
+- Linktree: `https://linktr.ee/ruby_musicofficial`
+- Single links:
+  - `https://distrokid.com/hyperfollow/rubytheband/26`
+  - `https://distrokid.com/hyperfollow/rubytheband/chasing-shadows`

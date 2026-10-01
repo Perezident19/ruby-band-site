@@ -1,4 +1,5 @@
 const SHEET_ID = "1CGFzrKhVgDeXkEemcdJiVtfnWeHjnU6wlFqHV3NPgw8";
+const MUSIC_SHEET_GID = "569666326";
 
 const fallbackMembers = [
   {
@@ -132,6 +133,11 @@ function loadSheet(sheetName) {
       tqx: `out:json;responseHandler:${callbackName}`,
       sheet: sheetName
     });
+    if (sheetName === "Music Release") {
+      params.delete("sheet");
+      params.set("gid", MUSIC_SHEET_GID);
+      params.set("headers", "1");
+    }
 
     window[callbackName] = (response) => {
       cleanup();
@@ -299,4 +305,72 @@ if (eventsList) {
   loadSheet("Shows")
     .then(renderEvents)
     .catch(() => renderEvents(fallbackShows));
+}
+
+const musicList = document.getElementById("music-list");
+const homeMusicList = document.getElementById("home-music-list");
+
+function getMusicUrl(value) {
+  const raw = String(value || "").trim();
+  try {
+    const url = new URL(raw);
+    return ["https:", "http:"].includes(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function renderMusicLinks(release, home) {
+  return ["primary", "secondary"].map((kind) => {
+    const url = getMusicUrl(release[kind + "_url"]);
+    if (!url) return "";
+    const label = release[kind + "_button_label"] || (kind === "primary" ? "Listen" : "More music");
+    const className = home ? "text-link" : "button button-" + kind;
+    return `<a class="${className}" href="${escapeHtml(url)}">${escapeHtml(label)}</a>`;
+  }).join("");
+}
+
+function renderMusicCard(release, home) {
+  const cover = getPhotoUrl({ photo_url: release.cover_art_url });
+  // Local cover paths support existing releases; sheet-provided external URLs must be HTTP(S).
+  const safeCover = getMusicUrl(cover) || (/^assets\/[a-z0-9_./-]+$/i.test(cover) ? cover : "");
+  const image = safeCover
+    ? `<img src="${escapeHtml(safeCover)}" alt="${escapeHtml(release.title)} cover art" loading="lazy" referrerpolicy="no-referrer" />`
+    : "";
+  const copy = `
+    ${release.label ? `<p class="release-label">${escapeHtml(release.label)}</p>` : ""}
+    <h3>${escapeHtml(release.title)}</h3>
+    ${release.description ? `<p>${escapeHtml(release.description)}</p>` : ""}
+    <div class="button-row">${renderMusicLinks(release, home)}</div>`;
+  return home
+    ? `<article class="release-card">${image ? `<figure class="cover-thumb">${image}</figure>` : ""}${copy}</article>`
+    : `<article class="release-panel"><div class="cover-art">${image}</div><div>${copy}</div></article>`;
+}
+
+function renderMusic(releases) {
+  const visible = sortRows(releases.filter((release) =>
+    isVisible(release) && String(release.title || "").trim()
+  ));
+  if (musicList) {
+    musicList.innerHTML = visible.length
+      ? visible.map((release) => renderMusicCard(release, false)).join("")
+      : '<p class="loading-note">New music coming soon.</p>';
+  }
+  if (homeMusicList) {
+    const featured = visible.filter((release) =>
+      String(release.featured_on_home || "").trim().toLowerCase() !== "no"
+    ).slice(0, 3);
+    homeMusicList.innerHTML = featured.length
+      ? featured.map((release) => renderMusicCard(release, true)).join("")
+      : '<p class="loading-note">New music coming soon.</p>';
+  }
+}
+
+if (musicList || homeMusicList) {
+  // Keep existing releases visible until the release tab has its required headers.
+  loadSheet("Music Release").then((releases) => {
+    if (releases.length && !Object.prototype.hasOwnProperty.call(releases[0], "title")) return;
+    if (!releases.length) return;
+    renderMusic(releases);
+  }).catch(() => {});
 }
