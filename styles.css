@@ -346,6 +346,25 @@ h3 {
   min-height: 390px;
 }
 
+.photo-frame.hero-photo,
+.photo-frame.page-hero-photo {
+  position: relative;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+}
+
+.photo-frame.hero-photo img,
+.photo-frame.page-hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html.sheet-images-loading img[data-site-image]:not([data-image-ready]) {
+  opacity: 0;
+}
+
 .crop-events-hero {
   object-position: center 46%;
 }

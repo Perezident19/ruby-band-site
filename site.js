@@ -129,6 +129,10 @@ function loadSheet(sheetName) {
   return new Promise((resolve, reject) => {
     const callbackName = `handleRubySheet_${sheetName}_${Date.now()}`.replace(/\W/g, "_");
     const script = document.createElement("script");
+    const timeout = sheetName === "Site Images" ? setTimeout(() => {
+      cleanup();
+      reject(new Error("Site Images timed out."));
+    }, 10000) : null;
     const params = new URLSearchParams({
       tqx: `out:json;responseHandler:${callbackName}`,
       sheet: sheetName
@@ -157,6 +161,7 @@ function loadSheet(sheetName) {
     };
 
     function cleanup() {
+      if (timeout !== null) clearTimeout(timeout);
       delete window[callbackName];
       script.remove();
     }
@@ -389,17 +394,21 @@ function renderSiteImages(rows) {
   const images = document.querySelectorAll("[data-site-image]");
   const settings = new Map(rows.map((row) => [String(row.image_id || "").trim(), row]));
   images.forEach((image) => {
+    const reveal = () => { image.dataset.imageReady = "yes"; };
     const row = settings.get(image.dataset.siteImage);
-    if (!row) return;
+    if (!row) { reveal(); return; }
     const url = getPhotoUrl({ photo_url: row.image_url });
     const safeUrl = getMusicUrl(url) || (/^assets\/[a-z0-9_./-]+$/i.test(url) ? url : "");
-    if (!safeUrl) return;
+    if (!safeUrl) { reveal(); return; }
     const position = getSiteImagePosition(row.crop_position);
     const apply = () => {
+      image.onload = reveal;
+      image.onerror = reveal;
       image.referrerPolicy = "no-referrer";
       image.src = safeUrl;
       if (String(row.alt_text || "").trim()) image.alt = String(row.alt_text).trim();
       if (position) image.style.objectPosition = position;
+      if (image.complete && image.naturalWidth) reveal();
     };
     if (safeUrl === image.getAttribute("src")) {
       apply();
@@ -407,12 +416,14 @@ function renderSiteImages(rows) {
     }
     // Only replace a working image after its replacement has successfully loaded.
     const preview = new Image();
+    const imageTimeout = setTimeout(reveal, 12000);
     preview.referrerPolicy = "no-referrer";
-    preview.onload = apply;
+    preview.onload = () => { clearTimeout(imageTimeout); apply(); };
+    preview.onerror = () => { clearTimeout(imageTimeout); reveal(); };
     preview.src = safeUrl;
   });
 }
 
 if (document.querySelectorAll("[data-site-image]").length) {
-  loadSheet("Site Images").then(renderSiteImages).catch(() => {});
+  loadSheet("Site Images").then(renderSiteImages).catch(() => renderSiteImages([]));
 }
