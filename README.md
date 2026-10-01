@@ -1,45 +1,40 @@
-# Ruby Mock Site
+# Hat Trick BBQ Company Practice Site
 
-This folder contains a separate Vercel-ready mock site for the band Ruby.
+This is a simple 2-page mock site:
 
-## Files
+- `index.html` = the home page
+- `menu.html` = the full menu page
+- `styles.css` = all the colors, spacing, and design
 
-- `index.html` = homepage
-- `band.html` = band member page
-- `events.html` = upcoming events page
-- `music.html` = original music page
-- `booking.html` = booking and contact page
-- `styles.css` = all visual styling
-- `site.js` = mock event list for the events page
+## What to edit first
 
-## Easiest edits
+If you want to personalize this for the real business, start here:
 
-If you want to change text:
+1. Open `index.html`
+2. Find the hero headline near the top
+3. Change the contact section near the bottom
+4. Open `menu.html`
+5. Replace the sample menu items with the real ones
 
-- edit the `.html` files
+## Fast beginner rule
 
-If you want to change colors or layout:
+If you want to change:
 
-- edit `styles.css`
+- words: edit `index.html` or `menu.html`
+- colors or styling: edit `styles.css`
 
-If you want to change event dates:
+## Current placeholders
 
-- open `site.js`
-- replace the sample event entries in the `events` list
+These still need real business info later:
 
-## What still needs real assets later
+- phone number
+- email
+- exact menu items
+- exact review quotes
+- any real photos
 
-- logo
-- band photos
-- member names and bios
-- real booking email and phone
-- exact event dates
-- video link
+## Next deployment step
 
-## Public references used for this mockup
+The site is ready locally.
 
-- Instagram: `https://www.instagram.com/ruby_musicofficial/`
-- Linktree: `https://linktr.ee/ruby_musicofficial`
-- Single links:
-  - `https://distrokid.com/hyperfollow/rubytheband/26`
-  - `https://distrokid.com/hyperfollow/rubytheband/chasing-shadows`
+To get it live on Vercel, the folder still needs to be linked and deployed from a machine that has the Vercel CLI available, or imported through a Git repository in Vercel.
